@@ -54,9 +54,10 @@ Mở http://localhost:8501. Sidebar hiển thị số thuốc / số vector và 
 ## 4. Chạy API cho POS (BE NestJS gọi)
 
 ```
-.venv\Scripts\uvicorn api:app --host 127.0.0.1 --port 8790
+.venv\Scripts\python api.py
 ```
 
+- Mặc định lắng nghe `127.0.0.1:8790`; đổi qua `RAG_API_HOST` / `RAG_API_PORT` trong `.env`.
 - BE đặt `RAG_SERVICE_URL=http://127.0.0.1:8790`; `RAG_INTERNAL_KEY` hai bên phải trùng nhau (để trống = không kiểm).
 - `GET /info`, `POST /chat` (stream SSE). Hợp đồng chi tiết: `plans/261105-0118-pos-rag-assistant/design.md` (gốc do-an).
   Bản RAG hoàn chỉnh giữ đúng hợp đồng này thì FE/BE không phải sửa.

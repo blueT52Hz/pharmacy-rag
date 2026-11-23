@@ -2,7 +2,7 @@
 
 Bản RAG hoàn chỉnh chỉ cần giữ đúng hợp đồng này (GET /info, POST /chat dạng SSE) là FE + BE không phải sửa.
 
-Chạy: uvicorn api:app --host 127.0.0.1 --port 8790
+Chạy: python api.py   (host/port lấy từ RAG_API_HOST / RAG_API_PORT trong .env, mặc định 127.0.0.1:8790)
 """
 import json
 import logging
@@ -14,7 +14,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from rag.config import RAG_INTERNAL_KEY, TOP_K
+from rag.config import RAG_API_HOST, RAG_API_PORT, RAG_INTERNAL_KEY, TOP_K
 from rag.example_questions import EXAMPLE_QUESTIONS
 from rag.rag_pipeline import RagPipeline, RetrievedChunk
 
@@ -106,3 +106,9 @@ def chat(req: ChatRequest) -> StreamingResponse:
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no"},
     )
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host=RAG_API_HOST, port=RAG_API_PORT)

@@ -35,3 +35,5 @@ TOP_K = int(_env("TOP_K", "6"))
 
 # API cho BE NestJS gọi (api.py). Rỗng = không kiểm khoá; chỉ nên để rỗng khi server bind 127.0.0.1.
 RAG_INTERNAL_KEY = _env("RAG_INTERNAL_KEY", "")
+RAG_API_HOST = _env("RAG_API_HOST", "127.0.0.1")
+RAG_API_PORT = int(_env("RAG_API_PORT", "8790"))
